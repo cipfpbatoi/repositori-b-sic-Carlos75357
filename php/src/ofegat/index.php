@@ -34,11 +34,12 @@
             if (comprovacioIntents($paraulaAEndevinar, $lletra, $paraulaGuions)) {
                 imprimeixTauler($paraulaGuions);
             } else {
-                echo '<span class="incorrect">La lletra ' . $lletra . ' no està en la paraula</span>';
+                echo '<span class="incorrect">La lletra ' . $lletra . ' no està en la paraula</span><br>';
+                imprimeixTauler($paraulaGuions);
             }
         } else {
-            echo 'Introdueix nomes una lletra';
+            echo 'Introdueix nomes una lletra<br>';
+            imprimeixTauler($paraulaGuions);
         }
-    ?>
-</body>
+    ?></body>
 </html>

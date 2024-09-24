@@ -3,7 +3,7 @@ function imprimeixTauler($paraulaGuions) {
     echo "Progrés del joc:<br>\n";
     echo "+---------------------+<br>\n";
     echo "| " . implode(' | ', $paraulaGuions) . " |<br>\n";
-    echo "+---------------------+\n";
+    echo "+---------------------+\n<br>\n";
 }
 
 function comprovacioIntents($paraulaAEndevinar, $lletra, &$arrayDeLletres) {
