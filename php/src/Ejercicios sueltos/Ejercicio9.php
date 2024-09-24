@@ -89,10 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $ubicacio_destinacio = "uploads/" . basename($nom_fitxer);
         if (move_uploaded_file($ubicacio_temporal, $ubicacio_destinacio)) {
-            echo "<p>El fitxer <strong>$nom_fitxer</strong> ha estat pujat correctament.</p>";
-            echo "<p>Tipus de fitxer: $tipus_fitxer</p>";
-            echo "<p>Mida del fitxer: " . ($mida_fitxer / 1024) . " KB</p>";
-            echo "<p>Ubicació del fitxer: $ubicacio_destinacio</p>";
+
         } else {
             echo "<p>Error al moure el fitxer a la ubicació final.</p>";
         }
