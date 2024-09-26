@@ -48,9 +48,3 @@ function ferMoviment($player, $columna, &$graella) {
         }
     }
 }
-
-function comprovacioVictoria() {
-    return false;
-}
-?>
-
