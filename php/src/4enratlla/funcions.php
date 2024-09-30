@@ -27,12 +27,15 @@ function pintarGraella($graella, $fila, $columna){
                     echo 'player2';
                     break;
             }
-            if($i == $fila - 1){
-                echo ' " style="color:white;font-size:2em;">' . ($j + 1);
-            }else{
+            
+            if ($i == $fila - 1) {
+                echo ' "><form method="post" style="margin:0;">
+                        <button type="submit" name="columna" value="' . ($j + 1) . '">' . ($j + 1) . '</button>
+                      </form>';
+            } else {
                 echo '">';
             }
-            
+
             echo '</td>';
         }
         echo '</tr>';

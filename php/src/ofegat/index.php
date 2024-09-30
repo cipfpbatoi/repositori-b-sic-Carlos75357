@@ -24,9 +24,7 @@
 
         $paraulaGuions = array_fill(0, strlen($paraulaAEndevinar), '_');
 
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            imprimeixTauler($paraulaGuions);
-        }
+
 
         $lletra = $_POST['lletra'] ?? '';
 
