@@ -23,4 +23,3 @@ function comprovacioIntents($paraulaAEndevinar, $lletra, &$arrayDeLletres) {
         return false;
     }
 }
-?>
