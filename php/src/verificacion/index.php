@@ -11,8 +11,15 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     if ($_POST['username'] == 'admin' && $_POST['password'] == 'admin') {
         $_SESSION['logged_in'] = true;
         $logged_in = true;
+        if (!isset($_SESSION['token_csrf'])) {
+            $token_csrf = bin2hex(random_bytes(32));
+            $_SESSION['token_csrf'] = $token_csrf;
+        } else {
+            $token_csrf = $_SESSION['token_csrf'];
+        }
         if (isset($_POST['remember_me'])) {
             setcookie('username', $_POST['username'], time() + (86400 * 30), '/');
+            setcookie('token_csrf', $token_csrf, time() + (86400 * 30), '/');
         }
         header('Location: index.php');
         exit;
@@ -20,10 +27,10 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         echo "Usuari o contrasenya incorrectes";
     }
 }
-
-if (isset($_COOKIE['username'])) {
+if (isset($_COOKIE['username']) && isset($_COOKIE['token_csrf'])) {
     $_SESSION['authenticated'] = true;
     $_SESSION['username'] = $_COOKIE['username'];
+    $_SESSION['token_csrf'] = $_COOKIE['token_csrf'];
 }
 
 if (isset($_GET['logout'])) {
@@ -59,10 +66,10 @@ if (isset($_GET['logout'])) {
     <p>Has iniciat sessió correctament.</p>
     <form action="jocs" method="POST">
         </br>
-        <label for="ofegat"><a href="../../../ofegat/index.php">Joc del penjat</a>
+        <label for="ofegat"><a href="../ofegat/index.php">Joc del penjat</a>
         </br>
         </br>
-        <label for="4enratlla"><a href="../../../4enratlla/index.php">4 en ratlla</a>
+        <label for="4enratlla"><a href="../4enratlla/index.php">4 en ratlla</a>
     </form>
     <?php echo "<p><a href='?logout'>Tancar sessió</a></p>"; ?>
     <?php if (isset($error)) echo "<p>$error</p>" ?>

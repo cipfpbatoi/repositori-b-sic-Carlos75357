@@ -23,3 +23,40 @@ function comprovacioIntents($paraulaAEndevinar, $lletra, &$arrayDeLletres) {
         return false;
     }
 }
+
+function reiniciaJoc() {
+    //session_destroy();
+    session_unset();
+    $_SESSION['paraulaAEndevinar'] = "ejemplo";
+    $_SESSION['paraulaGuions'] = array_fill(0, strlen($_SESSION['paraulaAEndevinar']), '_');
+    $_SESSION['lletresIntroduides'] = array();
+    //imprimeixTauler($_SESSION['paraulaGuions']);
+    //session_start();
+}
+
+function logout() {
+    session_destroy();
+    if (isset($_COOKIE['username']) || isset($_COOKIE['token_csrf'])) {
+        setcookie('username', '', time() - 1, '/');
+        setcookie('token_csrf','', time() - 1, '/');
+    }
+    header('Location: /verificacion/index.php');
+    exit;
+}
+
+function comprovacioVictoria() {
+    $paraula = implode('', $_SESSION['paraulaGuions']);
+    if ($paraula === $_SESSION['paraulaAEndevinar']) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function comprovarIntents() {
+    if ($_SESSION['intents'] === 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
