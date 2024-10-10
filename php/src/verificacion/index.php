@@ -7,6 +7,11 @@ if (isset($_SESSION['logged_in'])) {
     $logged_in = false;
 }
 
+if (isset($_COOKIE['token_csrf'])) {
+    $_SESSION['token_csrf'] = $_COOKIE['token_csrf'];
+    $logged_in = true;
+}
+
 if (isset($_POST['username']) && isset($_POST['password'])) {
     if ($_POST['username'] == 'admin' && $_POST['password'] == 'admin') {
         $_SESSION['logged_in'] = true;
@@ -37,6 +42,7 @@ if (isset($_GET['logout'])) {
     session_destroy();
     if (isset($_COOKIE['username'])) {
         setcookie('username', '', time() - 1, '/');
+        setcookie('token_csrf','', time() - 1, '/');
     }
     header('Location: index.php');
     exit;
