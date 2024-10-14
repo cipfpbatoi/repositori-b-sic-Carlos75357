@@ -59,9 +59,13 @@ function ferMoviment($player, $columna, &$graella) {
 
 
 function reiniciarJoc() {
-    session_unset();
-    header('Location: index.php');
-    exit;
+    $_SESSION['player'] = 1;
+    $_SESSION['guanyador'] = false;
+    $_SESSION['graella'] = inicialitzarGraella(8, 7);
+
+    //session_unset();
+    //header('Location: index.php');
+    //exit;
 }
 
 function logout() {
@@ -75,22 +79,18 @@ function logout() {
 }
 
 function comprovarGuanyador($graella, $jugador) {
-    for ($i = 0; $i < 7; $i++) { // Cambiado de 0 a 6 a 0 a 7
+    for ($i = 0; $i < 7; $i++) {
         for ($j = 0; $j < 7; $j++) {
             if ($graella[$i][$j] == $jugador) {
-                // Verifica horizontal
                 if ($j + 3 < 7 && $graella[$i][$j + 1] == $jugador && $graella[$i][$j + 2] == $jugador && $graella[$i][$j + 3] == $jugador) {
                     return true;
                 }
-                // Verifica vertical
                 if ($i + 3 < 7 && $graella[$i + 1][$j] == $jugador && $graella[$i + 2][$j] == $jugador && $graella[$i + 3][$j] == $jugador) {
                     return true;
                 }
-                // Verifica diagonal hacia abajo a la derecha
                 if ($i + 3 < 7 && $j + 3 < 7 && $graella[$i + 1][$j + 1] == $jugador && $graella[$i + 2][$j + 2] == $jugador && $graella[$i + 3][$j + 3] == $jugador) {
                     return true;
                 }
-                // Verifica diagonal hacia arriba a la derecha
                 if ($i + 3 < 7 && $j - 3 >= 0 && $graella[$i + 1][$j - 1] == $jugador && $graella[$i + 2][$j - 2] == $jugador && $graella[$i + 3][$j - 3] == $jugador) {
                     return true;
                 }

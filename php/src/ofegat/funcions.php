@@ -26,10 +26,12 @@ function comprovacioIntents($paraulaAEndevinar, $lletra, &$arrayDeLletres) {
 
 function reiniciaJoc() {
     //session_destroy();
-    session_unset();
+    // session_unset();
     $_SESSION['paraulaAEndevinar'] = "ejemplo";
     $_SESSION['paraulaGuions'] = array_fill(0, strlen($_SESSION['paraulaAEndevinar']), '_');
     $_SESSION['lletresIntroduides'] = array();
+    //header('Location: index.php');
+    //exit;
     //imprimeixTauler($_SESSION['paraulaGuions']);
     //session_start();
 }

@@ -48,24 +48,23 @@ if (isset($_POST['columna']) && !$guanyador) {
 
     $filaMovida = ferMoviment($player, $num, $graella);
     if ($filaMovida == -1) {
-        echo "Columna llena. Elige otra columna.";
-        exit();
+        echo '<h2>Columna llena. Elige otra columna.</h2>' . PHP_EOL;
+    } else {
+        $_SESSION['graella'] = $graella;
+
+        echo "Jugador actual: $player\n";
+
+        $guanyador = comprovarGuanyador($graella, $player);
+        $_SESSION['guanyador'] = $guanyador;
+
+        if ($guanyador) {
+            echo "¡El jugador $player ha ganado!" . PHP_EOL;
+            echo "</br></br><h2>No puedes seguir jugando. Has ganado.</h2>";
+        } else {
+            // Cambia de jugador solo si el movimiento es válido
+            $_SESSION['player'] = ($player == 1) ? 2 : 1;
+        }
     }
-
-    $_SESSION['graella'] = $graella;
-
-    echo "Jugador actual: $player\n";
-
-    $guanyador = comprovarGuanyador($graella, $player);
-    $_SESSION['guanyador'] = $guanyador; // Guarda el resultado en la sesión
-
-    if ($guanyador) {
-        echo "¡El jugador $player ha ganado!" . PHP_EOL;
-        echo "</br></br><h2>No puedes seguir jugando. Has ganado.</h2>";
-        // exit(); 
-    }    
-
-    $_SESSION['player'] = ($player == 1) ? 2 : 1;
 }
 ?>
 
